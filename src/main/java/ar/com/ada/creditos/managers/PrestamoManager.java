@@ -44,7 +44,6 @@ public class PrestamoManager {
 
         session.save(prestamo);
 
-
         session.getTransaction().commit();
         session.close();
     }
@@ -97,14 +96,14 @@ public class PrestamoManager {
      * 
      * @return
      */
-    public List<Prestamo> buscarTodos() {
+    public List<Prestamo> mostrarPrestamo() {
 
         Session session = sessionFactory.openSession();
 
         /// NUNCA HARCODEAR SQLs nativos en la aplicacion.
         // ESTO es solo para nivel educativo
         Query query = session.createNativeQuery("SELECT * FROM prestamo", Prestamo.class);
-        //query = session.createQuery("From Obse")
+        // query = session.createQuery("From Obse")
         List<Prestamo> todos = query.getResultList();
 
         return todos;
@@ -126,13 +125,13 @@ public class PrestamoManager {
         // Deberia traer solo aquella del nombre y con esto demostrarmos que trae todas
         // si pasamos
         // como nombre: "' or '1'='1"
-        Query query = session.createNativeQuery("SELECT * FROM cliente where nombre = '" + nombre + "'", Prestamo.class);
+        Query query = session.createNativeQuery("SELECT * FROM cliente where nombre = '" + nombre + "'",
+                Prestamo.class);
 
         List<Prestamo> prestamo = query.getResultList();
 
         return prestamo;
 
     }
-
 
 }

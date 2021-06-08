@@ -105,7 +105,7 @@ public class ABM {
         fecha = dateformatArgentina.parse(Teclado.nextLine());
         cliente.setFechaNacimiento(fecha);
 
-        //Ponerle un prestamo de 10mil a un cliente recien creado.
+        // Ponerle un prestamo de 10mil a un cliente recien creado.
         Prestamo prestamo = new Prestamo();
 
         prestamo.setImporte(new BigDecimal(10000));
@@ -113,8 +113,6 @@ public class ABM {
         prestamo.setFecha(new Date());
         prestamo.setFechaAlta(new Date());
         prestamo.setCliente(cliente);
-
-
 
         ABMCliente.create(cliente);
 
@@ -269,6 +267,14 @@ public class ABM {
         System.out.println(" Fecha Nacimiento: " + fechaNacimientoStr);
     }
 
+    public void listarPrestamo() {
+        List<Prestamo> todosLosPrestamos = ABMPrestamo.mostrarPrestamo();
+        for (Prestamo p : todosLosPrestamos) {
+            mostrarPrestamo(p);
+        }
+    }
+
+
     public static void printOpciones() {
         System.out.println("=======================================");
         System.out.println("");
@@ -277,6 +283,7 @@ public class ABM {
         System.out.println("3. Para modificar un cliente.");
         System.out.println("4. Para ver el listado.");
         System.out.println("5. Buscar un cliente por nombre especifico(SQL Injection)).");
+        System.err.println("6. Lista de prestamos.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");
