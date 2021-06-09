@@ -16,12 +16,14 @@ public class ABM {
     public static Scanner Teclado = new Scanner(System.in);
 
     protected ClienteManager ABMCliente = new ClienteManager();
+    protected PrestamoManager ABMPrestamo = new PrestamoManager();
 
     public void iniciar() throws Exception {
 
         try {
 
             ABMCliente.setup();
+            ABMPrestamo.setup();
 
             printOpciones();
 
@@ -54,6 +56,12 @@ public class ABM {
 
                     case 5:
                         listarPorNombre();
+                        break;
+                    case 6:
+                        listarPrestamo();
+                        break;
+                    case 7:
+                        altaPrestamo();
                         break;
 
                     default:
@@ -211,7 +219,7 @@ public class ABM {
 
                     break;
                 case 5:
-                    System.out.println("Ingrese fecha de nacimiento:");
+                    System.out.println("Ingrese fecha de nacimiento(dd/MM/yy):");
                     Date fecha = null;
                     DateFormat dateformatArgentina = new SimpleDateFormat("dd/MM/yy");
 
@@ -240,6 +248,8 @@ public class ABM {
         for (Cliente c : todos) {
             mostrarCliente(c);
         }
+        int cantidadClientes = ABMCliente.contarClienteJPQL();
+        System.out.println("La cantidad de clientes totales es: " + cantidadClientes);
     }
 
     public void listarPorNombre() {
@@ -251,6 +261,35 @@ public class ABM {
         for (Cliente cliente : clientes) {
             mostrarCliente(cliente);
         }
+    }
+
+    public void listarPrestamo() {
+        List<Prestamo> todosLosprestamos = ABMPrestamo.mostrarPrestamo();
+        for (Prestamo p : todosLosprestamos) {
+            mostrarPrestamo(p);
+        }
+    }
+
+    public void altaPrestamo() {
+        Prestamo prestamo = new Prestamo();
+
+        System.out.println("Ingrese el importe: ");
+        prestamo.setImporte(new BigDecimal(Teclado.nextInt()));
+
+        System.out.println("Ingrese cantidad de cuotas:");
+        prestamo.setCoutas(Teclado.nextInt());
+
+        prestamo.setFechaAlta(new Date());
+
+        prestamo.setFechaAlta(new Date());
+
+        System.out.println("Ingrese ID de cliente:");
+        Cliente cliente_id = ABMCliente.read(Teclado.nextInt());
+        prestamo.setCliente(cliente_id);
+
+        ABMPrestamo.create(prestamo);
+
+        System.out.println("El prestamo fue otorgado con exito " + prestamo.getPrestamoId());
     }
 
     public void mostrarCliente(Cliente cliente) {
@@ -267,13 +306,17 @@ public class ABM {
         System.out.println(" Fecha Nacimiento: " + fechaNacimientoStr);
     }
 
-    public void listarPrestamo() {
-        List<Prestamo> todosLosPrestamos = ABMPrestamo.mostrarPrestamo();
-        for (Prestamo p : todosLosPrestamos) {
-            mostrarPrestamo(p);
-        }
-    }
+    public void mostrarPrestamo(Prestamo prestamo) {
+        System.out.println("Id Prestamo " + prestamo.getPrestamoId() + " Datos Cliente:" + prestamo.getCliente()
+                + "Cuotas: " + prestamo.getCoutas() + "Importe: " + prestamo.getImporte());
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaPrestamoStr = formatter.format(prestamo.getFecha());
 
+        System.out.println("Fecha: " + fechaPrestamoStr);
+
+        String fechaPrestamoAltaStr = formatter.format(prestamo.getFechaAlta());
+        System.out.println("Fecha de Alta: " + fechaPrestamoAltaStr);
+    }
 
     public static void printOpciones() {
         System.out.println("=======================================");
@@ -284,6 +327,7 @@ public class ABM {
         System.out.println("4. Para ver el listado.");
         System.out.println("5. Buscar un cliente por nombre especifico(SQL Injection)).");
         System.err.println("6. Lista de prestamos.");
+        System.out.println("7. Generar prestamo a un cliente existente.");
         System.out.println("0. Para terminar.");
         System.out.println("");
         System.out.println("=======================================");

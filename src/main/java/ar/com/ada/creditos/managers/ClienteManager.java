@@ -44,7 +44,6 @@ public class ClienteManager {
 
         session.save(cliente);
 
-
         session.getTransaction().commit();
         session.close();
     }
@@ -104,7 +103,7 @@ public class ClienteManager {
         /// NUNCA HARCODEAR SQLs nativos en la aplicacion.
         // ESTO es solo para nivel educativo
         Query query = session.createNativeQuery("SELECT * FROM cliente", Cliente.class);
-        //query = session.createQuery("From Obse")
+        // query = session.createQuery("From Obse")
         List<Cliente> todos = query.getResultList();
 
         return todos;
@@ -134,5 +133,14 @@ public class ClienteManager {
 
     }
 
+    public int contarClienteJPQL() {
+        Session session = sessionFactory.openSession();
+
+        Query query = session.createQuery("SELECT count(c) FROM Cliente c");
+
+        int resultado = ((Number) query.getSingleResult()).intValue();
+
+        return resultado;
+    }
 
 }
