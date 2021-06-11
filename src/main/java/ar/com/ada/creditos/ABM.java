@@ -273,13 +273,13 @@ public class ABM {
     public void altaPrestamo() {
         Prestamo prestamo = new Prestamo();
 
-        System.out.println("Ingrese el importe: ");
+        System.out.println("Ingrese el monto del: ");
         prestamo.setImporte(new BigDecimal(Teclado.nextInt()));
 
         System.out.println("Ingrese cantidad de cuotas:");
         prestamo.setCoutas(Teclado.nextInt());
 
-        prestamo.setFechaAlta(new Date());
+        prestamo.setFecha(new Date());
 
         prestamo.setFechaAlta(new Date());
 
