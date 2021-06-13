@@ -58,16 +58,6 @@ public class PrestamoManager {
         return prestamo;
     }
 
-    public Prestamo readByDNI(int dni) {
-        Session session = sessionFactory.openSession();
-
-        Prestamo prestamo = session.byNaturalId(Prestamo.class).using("dni", dni).load();
-
-        session.close();
-
-        return prestamo;
-    }
-
     public void update(Prestamo prestamo) {
 
         Session session = sessionFactory.openSession();
@@ -110,13 +100,16 @@ public class PrestamoManager {
 
     }
 
-    /**
+    
+
+
+    /*
      * Busca una lista de clientes por el nombre completo Esta armado para que se
      * pueda generar un SQL Injection y mostrar commo NO debe programarse.
      * 
      * @param nombre
      * @return
-     */
+     *
     public List<Prestamo> buscarPor(String nombre) {
 
         Session session = sessionFactory.openSession();
@@ -125,13 +118,13 @@ public class PrestamoManager {
         // Deberia traer solo aquella del nombre y con esto demostrarmos que trae todas
         // si pasamos
         // como nombre: "' or '1'='1"
-        Query query = session.createNativeQuery("SELECT * FROM cliente where nombre = '" + nombre + "'",
+        Query query = session.createNativeQuery("SELECT * FROM prestamo where nombre = '" + nombre + "'",
                 Prestamo.class);
 
         List<Prestamo> prestamo = query.getResultList();
 
         return prestamo;
 
-    }
+    }*/
 
 }

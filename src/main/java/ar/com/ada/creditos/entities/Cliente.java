@@ -114,7 +114,11 @@ public class Cliente {
     }
 
     public void agregarPrestamo(Prestamo prestamo){
-        this.prestamos.add(prestamo);
+        if (!prestamos.contains(prestamo)){
+            prestamos.add(prestamo);
+            prestamo.setCliente(this);
+        }
+        //this.prestamos.add(prestamo);
     }
     
 }

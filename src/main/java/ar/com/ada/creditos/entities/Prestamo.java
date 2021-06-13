@@ -14,13 +14,13 @@ public class Prestamo {
     private int prestamoId;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "fecha_prestamo")
+    @Column (name = "fecha_prestamo")
     private Date fecha;
 
     private BigDecimal importe;
 
     private int coutas;
-
+    
     @Column(name = "fecha_alta")
     private Date fechaAlta;
 
@@ -76,7 +76,7 @@ public class Prestamo {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
         this.cliente.agregarPrestamo(this);
-        // this.cliente.getPrestamo().add(this);relacion bidireccional
+        //this.cliente.getPrestamo().add(this);relacion bidireccional
     }
 
 }
