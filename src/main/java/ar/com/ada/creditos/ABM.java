@@ -326,7 +326,7 @@ public class ABM {
         System.out.println("3. Para modificar un cliente.");
         System.out.println("4. Para ver el listado.");
         System.out.println("5. Buscar un cliente por nombre especifico(SQL Injection)).");
-        System.err.println("6. Lista de prestamos.");
+        System.err.println("6. Listado de prestamos.");
         System.out.println("7. Generar prestamo a un cliente existente.");
         System.out.println("0. Para terminar.");
         System.out.println("");
