@@ -18,6 +18,7 @@ public class ABM {
 
     protected ClienteManager ABMCliente = new ClienteManager();
     protected PrestamoManager ABMPrestamo = new PrestamoManager();
+    //protected CancelacionesManager ABMCancelaciones = new CancelacionesManager();
 
     public void iniciar() throws Exception {
 
@@ -277,7 +278,7 @@ public class ABM {
     public void altaPrestamo() {
         Prestamo prestamo = new Prestamo();
 
-        System.out.println("Ingrese el monto del: ");
+        System.out.println("Ingrese el monto del prestamo: ");
         prestamo.setImporte(new BigDecimal(Teclado.nextInt()));
 
         System.out.println("Ingrese cantidad de cuotas:");
